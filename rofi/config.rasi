@@ -1,0 +1,39 @@
+configuration {
+  modes: "drun";
+  show-icons: false;
+  drun-display-format: "{name}";
+  font: "JetBrains Mono 20";
+}
+
+* {
+  bg: #1a1b26;
+  fg: #c0caf5;
+  accent: #7aa2f7;
+  muted: #565f89;
+  background-color: transparent;
+  text-color: @fg;
+}
+
+window {
+  location: center;
+  width: 40%;
+  background-color: @bg;
+  border: 2px;
+  border-color: @accent;
+}
+
+mainbox { children: [ inputbar, listview ]; }
+
+inputbar {
+  padding: 0 16px;
+  height: 56px;
+  children: [ prompt, entry ];
+  background-color: @bg;
+}
+prompt { text-color: @accent; padding: 12px 8px 0 0; }
+entry { placeholder: "Search"; placeholder-color: @muted; padding: 12px 0 0 0; }
+
+listview { lines: 8; scrollbar: false; padding: 0 0 8px 0; }
+
+element { padding: 8px 16px; }
+element selected.normal { background-color: @accent; text-color: @bg; }
