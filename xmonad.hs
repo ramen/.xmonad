@@ -1,12 +1,12 @@
 import XMonad
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Spacing
 import XMonad.Layout.Reflect (reflectHoriz)
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.SpawnOnce
-import qualified XMonad.StackSet as W
 
 myTerminal :: String
 myTerminal = "xfce4-terminal"
@@ -23,11 +23,12 @@ myFocusedBorderColor = "#7aa2f7"
 myLauncher :: String
 myLauncher = "rofi -show drun -config ~/.xmonad/rofi/config.rasi"
 
+mySpacing :: l a -> ModifiedLayout Spacing l a
 mySpacing = spacingRaw False (Border 4 4 4 4) True (Border 4 4 4 4) True
 
 myLayout = avoidStruts $ smartBorders $ mySpacing (reflectHoriz tiled ||| Full)
   where
-    tiled   = Tall 1 (3/100) (1/2)
+    tiled = Tall 1 (3/100) (1/2)
 
 -- Optional helpers are started only if installed, so the config works as-is.
 spawnIfExists :: String -> String -> X ()
@@ -50,8 +51,6 @@ main = xmonad . ewmhFullscreen . ewmh . docks $ def
     , startupHook        = myStartupHook
     } `additionalKeysP`
     [ ("M-p",         spawn myLauncher)
-    , ("M-w",         kill)
     , ("M-S-[",       sendMessage Expand)
     , ("M-S-]",       sendMessage Shrink)
-    , ("M-S-<Space>", sendMessage ToggleStruts)
     ]
