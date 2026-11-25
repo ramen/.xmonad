@@ -53,4 +53,5 @@ main = xmonad . ewmhFullscreen . ewmh . docks $ def
     [ ("M-p",         spawn myLauncher)
     , ("M-S-[",       sendMessage Expand)
     , ("M-S-]",       sendMessage Shrink)
+    , ("<Print>",     spawn "xfce4-screenshooter -f")
     ]
